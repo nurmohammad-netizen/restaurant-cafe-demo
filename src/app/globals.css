@@ -12,3 +12,47 @@ html {
 body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
+
+/* Hero background: slow "Ken Burns" breathing zoom. Animates `transform`
+   only (GPU-compositor-only, no layout/paint cost) so it stays cheap even
+   on low-end mobile. `alternate` makes the loop seamless — it eases in
+   then back out, with no jump-cut. */
+@keyframes hero-ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.hero-ken-burns {
+  animation: hero-ken-burns 20s ease-in-out infinite alternate;
+}
+
+/* Order Now CTA: a soft amber halo that breathes outward, drawing the eye
+   without ever changing the button's own opacity/size. */
+@keyframes cta-glow-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(245, 158, 11, 0.45),
+      0 4px 14px rgba(245, 158, 11, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 0 12px rgba(245, 158, 11, 0),
+      0 4px 20px rgba(245, 158, 11, 0.5);
+  }
+}
+
+.cta-glow-pulse {
+  animation: cta-glow-pulse 2.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-ken-burns,
+  .cta-glow-pulse {
+    animation: none;
+  }
+}

@@ -3,28 +3,29 @@ import type { Shop } from "@/lib/database.types";
 
 export function Hero({ shop }: { shop: Shop | null }) {
   return (
-    <section className="relative overflow-hidden px-4 py-24 text-center sm:py-32">
+    <section className="relative overflow-hidden px-4 py-28 text-center sm:py-36">
       <Image
-        src="https://images.unsplash.com/photo-1642972420043-4736c570a716?q=80&auto=format&fit=crop"
+        src="https://images.unsplash.com/photo-1515931215890-366d3990cf8d?q=80&auto=format&fit=crop"
         alt=""
         fill
         priority
         sizes="100vw"
-        className="object-cover"
+        className="hero-ken-burns object-cover"
       />
 
-      {/* Dark gradient overlay — keeps headline/CTA readable over the photo
-          while still showing enough of the dish to be appetizing. */}
+      {/* Warm amber-tinted overlay (brand color, not flat black) — still
+          dark enough at top/bottom for the headline and CTA to stay high
+          contrast over a busy action photo. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-neutral-950/90 via-neutral-950/75 to-neutral-950/90"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/85 via-amber-950/55 to-black/85"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-40"
+        className="pointer-events-none absolute inset-0 opacity-50"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 50% 0%, rgba(245,158,11,0.35), transparent 60%)",
+            "radial-gradient(circle at 50% 0%, rgba(245,158,11,0.4), transparent 60%)",
         }}
       />
 
@@ -32,15 +33,21 @@ export function Hero({ shop }: { shop: Shop | null }) {
         <p className="mb-3 text-sm font-medium uppercase tracking-widest text-amber-500">
           Cash on Delivery
         </p>
-        <h1 className="text-4xl font-extrabold text-neutral-50 drop-shadow-sm sm:text-5xl">
+        <h1
+          className="text-5xl font-black tracking-tight text-neutral-50 sm:text-6xl md:text-7xl"
+          style={{ textShadow: "0 4px 24px rgba(0, 0, 0, 0.6)" }}
+        >
           {shop?.name ?? "Dhaka Delights Cafe"}
         </h1>
-        <p className="mt-4 text-lg text-neutral-200 drop-shadow-sm">
+        <p
+          className="mt-4 text-lg text-neutral-200"
+          style={{ textShadow: "0 2px 12px rgba(0, 0, 0, 0.6)" }}
+        >
           ঘরে বসেই অর্ডার করুন প্রিয় খাবার — ডেলিভারিতে ক্যাশ পেমেন্ট
         </p>
         <a
           href="#menu"
-          className="mt-8 inline-block rounded-full bg-amber-500 px-8 py-3 font-semibold text-neutral-950 shadow-lg shadow-amber-500/20 transition-colors hover:bg-amber-400"
+          className="cta-glow-pulse mt-8 inline-block rounded-full bg-amber-500 px-8 py-3 font-semibold text-neutral-950 transition-colors hover:bg-amber-400"
         >
           Order Now
         </a>
