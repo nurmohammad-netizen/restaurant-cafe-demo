@@ -5,7 +5,7 @@ export function Hero({ shop }: { shop: Shop | null }) {
   return (
     <section className="relative overflow-hidden px-4 py-28 text-center sm:py-36">
       <Image
-        src="https://images.unsplash.com/photo-1515931215890-366d3990cf8d?q=80&auto=format&fit=crop"
+        src="https://images.unsplash.com/photo-1633945274405-b6c8069047b0?q=80&auto=format&fit=crop"
         alt=""
         fill
         priority
@@ -13,12 +13,14 @@ export function Hero({ shop }: { shop: Shop | null }) {
         className="hero-ken-burns object-cover"
       />
 
-      {/* Warm amber-tinted overlay (brand color, not flat black) — still
-          dark enough at top/bottom for the headline and CTA to stay high
-          contrast over a busy action photo. */}
+      {/* Warm amber-tinted overlay (brand color, not flat black). Kept
+          moderate rather than heavy — the source photo is already
+          dark/moody on its own (dark navy fabric, deep shadows), so a
+          strong wash on top crushes it to near-black. Legibility leans on
+          font-black + text-shadow below, not on flattening the photo. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/85 via-amber-950/55 to-black/85"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/60 via-amber-950/35 to-black/70"
       />
       <div
         aria-hidden
