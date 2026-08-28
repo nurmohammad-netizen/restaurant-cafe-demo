@@ -53,53 +53,69 @@ export function MenuItemFormModal({
         fieldErrors[issue.path[0] as string] = issue.message;
       }
       setErrors(fieldErrors);
+      // Not every field above has its own inline error element (e.g.
+      // category_id), so without this a validation failure on one of those
+      // fields would fail the submit with zero visible feedback.
+      if (!fieldErrors.name && !fieldErrors.price) {
+        setSaveError(
+          Object.values(fieldErrors)[0] ?? "ফর্মে একটি ভুল আছে, আবার চেষ্টা করুন।",
+        );
+      }
       return;
     }
     setErrors({});
     setSaving(true);
 
-    const supabase = createClient();
+    try {
+      const supabase = createClient();
 
-    let finalImageUrl = item?.image_url ?? null;
-    if (imageFile) {
-      const ext = imageFile.name.split(".").pop();
-      const path = `${shopId}/${crypto.randomUUID()}.${ext}`;
-      const { error: uploadError } = await supabase.storage
-        .from("menu-images")
-        .upload(path, imageFile, { upsert: true });
+      let finalImageUrl = item?.image_url ?? null;
+      if (imageFile) {
+        const ext = imageFile.name.split(".").pop();
+        const path = `${shopId}/${crypto.randomUUID()}.${ext}`;
+        const { error: uploadError } = await supabase.storage
+          .from("menu-images")
+          .upload(path, imageFile, { upsert: true });
 
-      if (uploadError) {
-        setSaveError("ছবি আপলোড করা যায়নি।");
-        setSaving(false);
+        if (uploadError) {
+          console.error("Menu image upload failed:", uploadError);
+          setSaveError(`ছবি আপলোড করা যায়নি: ${uploadError.message}`);
+          return;
+        }
+
+        finalImageUrl = supabase.storage.from("menu-images").getPublicUrl(path)
+          .data.publicUrl;
+      }
+
+      const payload = {
+        shop_id: shopId,
+        name: result.data.name,
+        description: result.data.description || null,
+        price: result.data.price,
+        category_id: result.data.category_id,
+        is_available: result.data.is_available,
+        image_url: finalImageUrl,
+      };
+
+      const { error } = item
+        ? await supabase.from("menu_items").update(payload).eq("id", item.id)
+        : await supabase.from("menu_items").insert(payload);
+
+      if (error) {
+        console.error("Menu item save failed:", error);
+        setSaveError(`সংরক্ষণ করা যায়নি: ${error.message}`);
         return;
       }
 
-      finalImageUrl = supabase.storage.from("menu-images").getPublicUrl(path)
-        .data.publicUrl;
+      onSaved();
+    } catch (err) {
+      console.error("Unexpected error saving menu item:", err);
+      setSaveError(
+        err instanceof Error ? err.message : "একটি অপ্রত্যাশিত সমস্যা হয়েছে।",
+      );
+    } finally {
+      setSaving(false);
     }
-
-    const payload = {
-      shop_id: shopId,
-      name: result.data.name,
-      description: result.data.description || null,
-      price: result.data.price,
-      category_id: result.data.category_id,
-      is_available: result.data.is_available,
-      image_url: finalImageUrl,
-    };
-
-    const { error } = item
-      ? await supabase.from("menu_items").update(payload).eq("id", item.id)
-      : await supabase.from("menu_items").insert(payload);
-
-    setSaving(false);
-
-    if (error) {
-      setSaveError("সংরক্ষণ করা যায়নি। আবার চেষ্টা করুন।");
-      return;
-    }
-
-    onSaved();
   }
 
   return (
