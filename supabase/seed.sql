@@ -46,7 +46,7 @@ insert into menu_items (id, shop_id, category_id, name, description, price, imag
   ('33333333-3333-3333-a333-333333333303', '11111111-1111-1111-1111-111111111111', '22222222-2222-2222-a222-222222222221', 'Kacchi Biryani', 'Dum-cooked mutton and basmati rice with potato, sealed in aromatic spices', 320, 'https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800&q=80&auto=format&fit=crop', true),
 
   -- Traditional Favorites
-  ('33333333-3333-3333-a333-333333333315', '11111111-1111-1111-1111-111111111111', '22222222-2222-2222-a222-222222222225', 'Aloo Bhorta Set', 'Home-style mashed potato in mustard oil with onion and chili, served with rice and silky dal', 90, 'https://images.unsplash.com/photo-1633945274417-ab205ae69d10?w=800&q=80&auto=format&fit=crop', true),
+  ('33333333-3333-3333-a333-333333333315', '11111111-1111-1111-1111-111111111111', '22222222-2222-2222-a222-222222222225', 'Aloo Bhorta Set', 'Home-style mashed potato in mustard oil with onion and chili, served with rice and silky dal', 90, 'https://images.unsplash.com/photo-1777613112793-4fb0717c193b?w=800&q=80&auto=format&fit=crop', true),
   ('33333333-3333-3333-a333-333333333316', '11111111-1111-1111-1111-111111111111', '22222222-2222-2222-a222-222222222225', 'Haleem', 'Slow-cooked lentils and shredded beef, topped with crispy fried onions', 150, 'https://images.unsplash.com/photo-1512010151537-2cf5c638ad51?w=800&q=80&auto=format&fit=crop', true),
 
   -- Burgers & Fast Food
