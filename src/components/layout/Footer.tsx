@@ -45,6 +45,22 @@ export function Footer({ shop }: { shop: Shop | null }) {
         <p className="text-xs text-neutral-600">
           Built with Next.js, Tailwind CSS & Claude Code
         </p>
+
+        {/* Required attribution for the Mishti Doi photo (CC BY-SA 4.0) —
+            every other image on this site is attribution-free, this is the
+            one exception. */}
+        <p className="text-xs text-neutral-700">
+          মিষ্টি দইয়ের ছবি: Masum-al-Hasan Rocky ·{" "}
+          <a
+            href="https://commons.wikimedia.org/wiki/File:Bogurar_doi.jpg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-amber-500"
+          >
+            Wikimedia Commons
+          </a>{" "}
+          (CC BY-SA 4.0)
+        </p>
       </div>
     </footer>
   );

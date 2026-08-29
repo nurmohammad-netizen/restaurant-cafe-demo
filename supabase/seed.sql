@@ -68,5 +68,9 @@ insert into menu_items (id, shop_id, category_id, name, description, price, imag
   ('33333333-3333-3333-a333-333333333318', '11111111-1111-1111-1111-111111111111', '22222222-2222-2222-a222-222222222224', 'Borhani', 'Yogurt blended with mint, spices and tangy black salt', 50, 'https://images.unsplash.com/photo-1630409346699-79481a79db52?w=800&q=80&auto=format&fit=crop', true),
 
   -- Desserts
-  ('33333333-3333-3333-a333-333333333317', '11111111-1111-1111-1111-111111111111', '22222222-2222-2222-a222-222222222226', 'Mishti Doi', 'Silky yogurt set in clay pots with caramelized sugar', 60, 'https://images.pexels.com/photos/34153206/pexels-photo-34153206.jpeg?auto=compress&cs=tinysrgb&w=800', true)
+  -- Photo: Masum-al-Hasan Rocky, Wikimedia Commons, CC BY-SA 4.0 — see
+  -- https://commons.wikimedia.org/wiki/File:Bogurar_doi.jpg
+  -- Unlike every other image in this file, this one requires attribution;
+  -- see the credit line in src/components/layout/Footer.tsx.
+  ('33333333-3333-3333-a333-333333333317', '11111111-1111-1111-1111-111111111111', '22222222-2222-2222-a222-222222222226', 'Mishti Doi', 'Silky yogurt set in clay pots with caramelized sugar', 60, 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Bogurar_doi.jpg/1280px-Bogurar_doi.jpg', true)
 on conflict (id) do nothing;
