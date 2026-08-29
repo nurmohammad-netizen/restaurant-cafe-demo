@@ -53,7 +53,7 @@ export default async function HomePage() {
       <Hero shop={shop} />
       <StatsBar />
       <TrustBadges />
-      <AboutSection shop={shop} />
+      <AboutSection />
       <PhotoGallery />
       <WhyOrderDirect />
       <Testimonials />
