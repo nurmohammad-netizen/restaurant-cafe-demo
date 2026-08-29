@@ -1,10 +1,21 @@
 import type { Shop } from "@/lib/database.types";
 
+// Subtle woven-jute texture (coarse diagonal crosshatch), very low opacity
+// so it reads as texture, not pattern. Tiled via CSS, not a photo.
+const JUTE_TEXTURE = `<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'>
+  <path d='M0 0 L16 16 M16 0 L0 16' stroke='#78716c' stroke-width='0.6' opacity='0.18'/>
+</svg>`;
+
 export function Footer({ shop }: { shop: Shop | null }) {
   const whatsapp = shop?.whatsapp_number?.replace(/[^0-9]/g, "");
 
   return (
-    <footer className="border-t border-neutral-800 bg-neutral-950 px-4 py-10 text-neutral-400">
+    <footer
+      className="border-t border-neutral-800 bg-neutral-950 px-4 py-10 text-neutral-400"
+      style={{
+        backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(JUTE_TEXTURE)}")`,
+      }}
+    >
       <div className="mx-auto max-w-3xl space-y-6 text-center">
         <div>
           <h3 className="text-lg font-bold text-neutral-100">
