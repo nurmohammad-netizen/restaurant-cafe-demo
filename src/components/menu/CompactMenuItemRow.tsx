@@ -48,7 +48,11 @@ export function CompactMenuItemRow({ item }: { item: MenuItem }) {
           usability bug (customers can't tell what they're ordering), so
           it wraps to a second line instead of being cut off. */}
       <div className="min-w-0 flex-1">
-        <p className="font-display text-xl leading-tight font-extrabold break-words text-neutral-100">
+        {/* text-lg matches Hero's subtitle ("ডেলিভারিতে ক্যাশ পেমেন্ট",
+            src/components/layout/Hero.tsx) — same font-size step in the
+            page's type scale, kept consistent rather than a bespoke
+            value. Weight/typeface still carry the visual emphasis. */}
+        <p className="font-display text-lg leading-tight font-extrabold break-words text-neutral-100">
           {item.name}
         </p>
         {item.description ? (
