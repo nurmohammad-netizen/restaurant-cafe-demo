@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { formatTaka } from "@/lib/utils";
 import type { MenuItem } from "@/lib/database.types";
@@ -11,6 +12,19 @@ import type { MenuItem } from "@/lib/database.types";
 // the everyday-item counterpart.
 export function FeaturedMenuItemCard({ item }: { item: MenuItem }) {
   const { addItem } = useCart();
+  const [justAdded, setJustAdded] = useState(false);
+  const resetTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
+
+  useEffect(() => () => clearTimeout(resetTimeout.current), []);
+
+  function handleAdd() {
+    addItem({ menu_item_id: item.id, name: item.name, price: item.price });
+    setJustAdded(true);
+    clearTimeout(resetTimeout.current);
+    resetTimeout.current = setTimeout(() => setJustAdded(false), 1200);
+  }
 
   return (
     <div className="overflow-hidden rounded-2xl border border-brass-500/40 bg-neutral-900">
@@ -47,16 +61,15 @@ export function FeaturedMenuItemCard({ item }: { item: MenuItem }) {
           </span>
           <button
             type="button"
-            onClick={() =>
-              addItem({
-                menu_item_id: item.id,
-                name: item.name,
-                price: item.price,
-              })
-            }
-            className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-medium text-neutral-950 transition-colors hover:bg-amber-400 active:bg-amber-600"
+            onClick={handleAdd}
+            className={`rounded-lg px-4 py-2 text-sm font-medium ${
+              justAdded
+                ? "scale-105 bg-betel-600 text-neutral-50"
+                : "bg-amber-500 text-neutral-950 transition-colors hover:bg-amber-400 active:bg-amber-600"
+            }`}
+            style={{ transition: "transform 0.2s ease" }}
           >
-            Add to Cart
+            {justAdded ? "✓ Added" : "Add to Cart"}
           </button>
         </div>
       </div>
