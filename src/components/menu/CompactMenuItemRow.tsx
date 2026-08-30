@@ -44,12 +44,15 @@ export function CompactMenuItemRow({ item }: { item: MenuItem }) {
         )}
       </div>
 
+      {/* No truncation on the name — a clipped dish name is a real
+          usability bug (customers can't tell what they're ordering), so
+          it wraps to a second line instead of being cut off. */}
       <div className="min-w-0 flex-1">
-        <p className="truncate text-lg font-bold text-neutral-100">
+        <p className="font-display text-xl leading-tight font-extrabold break-words text-neutral-100">
           {item.name}
         </p>
         {item.description ? (
-          <p className="truncate text-sm text-neutral-400">
+          <p className="mt-1 line-clamp-2 text-sm text-neutral-400">
             {item.description}
           </p>
         ) : null}
