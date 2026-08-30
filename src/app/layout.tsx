@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Baloo_Da_2, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+// Display face — headlines only. Warm, rounded, has real Bengali+Latin
+// character instead of a generic geometric sans.
+const balooDa2 = Baloo_Da_2({
+  variable: "--font-baloo",
+  subsets: ["bengali", "latin"],
+  weight: ["500", "600", "700", "800"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+// Body face — restrained and clean, deliberately distinct from the
+// display face so the pairing reads as a choice, not a default.
+const hindSiliguri = Hind_Siliguri({
+  variable: "--font-hind",
+  subsets: ["bengali", "latin"],
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -22,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${balooDa2.variable} ${hindSiliguri.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-neutral-950 text-neutral-100">
         {children}

@@ -13,11 +13,11 @@ export function Hero({ shop }: { shop: Shop | null }) {
         className="hero-ken-burns object-cover"
       />
 
-      {/* Warm amber-tinted overlay (brand color, not flat black). Kept
+      {/* Brick-and-turmeric overlay (brand tones, not flat black). Kept
           moderate rather than heavy — the source photo is already
           dark/moody on its own (dark navy fabric, deep shadows), so a
           strong wash on top crushes it to near-black. Legibility leans on
-          font-black + text-shadow below, not on flattening the photo. */}
+          font weight + text-shadow below, not on flattening the photo. */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/60 via-amber-950/35 to-black/70"
@@ -27,25 +27,25 @@ export function Hero({ shop }: { shop: Shop | null }) {
         className="pointer-events-none absolute inset-0 opacity-50"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 50% 0%, rgba(245,158,11,0.4), transparent 60%)",
+            "radial-gradient(circle at 50% 0%, rgba(198,137,47,0.4), transparent 60%)",
         }}
       />
 
       <div className="relative mx-auto max-w-2xl">
-        <p className="mb-3 text-sm font-medium uppercase tracking-widest text-amber-500">
-          Cash on Delivery
+        <p className="mb-3 inline-block border-b border-brass-500/50 pb-1 text-sm font-medium text-amber-400">
+          {shop?.name ?? "Dhaka Delights Cafe"}
         </p>
         <h1
-          className="text-5xl font-black tracking-tight text-neutral-50 sm:text-6xl md:text-7xl"
+          className="font-display text-4xl font-bold text-neutral-50 sm:text-5xl md:text-6xl"
           style={{ textShadow: "0 4px 24px rgba(0, 0, 0, 0.6)" }}
         >
-          {shop?.name ?? "Dhaka Delights Cafe"}
+          ঘরে বসেই অর্ডার করুন প্রিয় খাবার
         </h1>
         <p
           className="mt-4 text-lg text-neutral-200"
           style={{ textShadow: "0 2px 12px rgba(0, 0, 0, 0.6)" }}
         >
-          ঘরে বসেই অর্ডার করুন প্রিয় খাবার — ডেলিভারিতে ক্যাশ পেমেন্ট
+          ডেলিভারিতে ক্যাশ পেমেন্ট
         </p>
         <a
           href="#menu"

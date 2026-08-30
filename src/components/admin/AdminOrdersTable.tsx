@@ -104,7 +104,7 @@ export function AdminOrdersTable({ shopId }: { shopId: string }) {
           {expandedId === order.id ? (
             <div className="space-y-3 border-t border-neutral-800 px-4 py-3">
               <div>
-                <p className="text-xs font-medium uppercase text-neutral-500">
+                <p className="text-xs font-medium text-neutral-500">
                   ঠিকানা
                 </p>
                 <p className="text-sm text-neutral-300">
@@ -114,7 +114,7 @@ export function AdminOrdersTable({ shopId }: { shopId: string }) {
 
               {order.notes ? (
                 <div>
-                  <p className="text-xs font-medium uppercase text-neutral-500">
+                  <p className="text-xs font-medium text-neutral-500">
                     নোট
                   </p>
                   <p className="text-sm text-neutral-300">{order.notes}</p>
@@ -122,7 +122,7 @@ export function AdminOrdersTable({ shopId }: { shopId: string }) {
               ) : null}
 
               <div>
-                <p className="mb-1 text-xs font-medium uppercase text-neutral-500">
+                <p className="mb-1 text-xs font-medium text-neutral-500">
                   আইটেম
                 </p>
                 <ul className="space-y-1">
@@ -141,7 +141,7 @@ export function AdminOrdersTable({ shopId }: { shopId: string }) {
               </div>
 
               <div>
-                <label className="mb-1 block text-xs font-medium uppercase text-neutral-500">
+                <label className="mb-1 block text-xs font-medium text-neutral-500">
                   Status
                 </label>
                 <select

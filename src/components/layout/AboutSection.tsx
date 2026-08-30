@@ -18,7 +18,7 @@ export function AboutSection() {
         </div>
 
         <div className="text-center sm:text-left">
-          <h2 className="mb-4 text-2xl font-bold text-neutral-100">
+          <h2 className="font-display mb-4 text-2xl font-bold text-neutral-100">
             আমাদের গল্প
           </h2>
           <p className="leading-relaxed text-neutral-300">

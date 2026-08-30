@@ -1,8 +1,54 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
+  /* Body text defaults to Hind Siliguri everywhere; headings opt into
+     Baloo Da 2 via the `font-display` utility (see below). */
+  --font-sans: var(--font-hind);
+  --font-display: var(--font-baloo);
   --font-mono: var(--font-geist-mono);
+
+  /* -------------------------------------------------------------------
+     "Dhaka brick & turmeric" — a palette pulled from the city itself
+     (weathered red-brick facades, spice-market turmeric, betel-leaf
+     green, brass tiffin carriers) instead of a generic near-black +
+     one-bright-accent dark theme. Overriding Tailwind's built-in
+     `neutral` and `amber` scales here reskins every component that
+     already uses bg-neutral-950, text-amber-500, etc. — no need to
+     touch each file's classNames individually. `betel` and `brass` are
+     net-new tokens for the secondary accent and hairline/divider color.
+     ------------------------------------------------------------------- */
+
+  /* neutral -> brick/ink (backgrounds, borders, body text on dark) */
+  --color-neutral-50: #f4ead9;
+  --color-neutral-100: #ecdec7;
+  --color-neutral-200: #d9c4a8;
+  --color-neutral-300: #cbb99a;
+  --color-neutral-400: #a67c55;
+  --color-neutral-500: #8a6142;
+  --color-neutral-600: #6b4a30;
+  --color-neutral-700: #593722;
+  --color-neutral-800: #3e2618;
+  --color-neutral-900: #2a1811;
+  --color-neutral-950: #1c0e08;
+
+  /* amber -> turmeric gold (primary accent) */
+  --color-amber-300: #e8c383;
+  --color-amber-400: #d9a24c;
+  --color-amber-500: #c6892f;
+  --color-amber-600: #a06f22;
+  --color-amber-900: #4a3210;
+  --color-amber-950: #2e1f0c;
+
+  /* new: betel-leaf green — secondary accent, used sparingly */
+  --color-betel-400: #6a9a5f;
+  --color-betel-500: #4f8048;
+  --color-betel-600: #3d6b3b;
+  --color-betel-900: #1c2e1a;
+
+  /* new: brass/copper — hairlines, dividers, card edges */
+  --color-brass-400: #b3925c;
+  --color-brass-500: #9c7a45;
+  --color-brass-600: #7d6238;
 }
 
 html {
@@ -10,7 +56,8 @@ html {
 }
 
 body {
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), "Noto Sans Bengali", Arial, Helvetica,
+    sans-serif;
 }
 
 /* Hero background: slow "Ken Burns" breathing zoom. Animates `transform`
@@ -30,19 +77,19 @@ body {
   animation: hero-ken-burns 20s ease-in-out infinite alternate;
 }
 
-/* Order Now CTA: a soft amber halo that breathes outward, drawing the eye
-   without ever changing the button's own opacity/size. */
+/* Order Now CTA: a soft turmeric-gold halo that breathes outward,
+   drawing the eye without ever changing the button's own opacity/size. */
 @keyframes cta-glow-pulse {
   0%,
   100% {
     box-shadow:
-      0 0 0 0 rgba(245, 158, 11, 0.45),
-      0 4px 14px rgba(245, 158, 11, 0.25);
+      0 0 0 0 rgba(198, 137, 47, 0.45),
+      0 4px 14px rgba(198, 137, 47, 0.25);
   }
   50% {
     box-shadow:
-      0 0 0 12px rgba(245, 158, 11, 0),
-      0 4px 20px rgba(245, 158, 11, 0.5);
+      0 0 0 12px rgba(198, 137, 47, 0),
+      0 4px 20px rgba(198, 137, 47, 0.5);
   }
 }
 

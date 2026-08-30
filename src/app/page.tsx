@@ -62,7 +62,7 @@ export default async function HomePage() {
       <NakshiDivider />
 
       <section id="menu" className="mx-auto w-full max-w-3xl px-4 py-14">
-        <h2 className="mb-8 text-center text-2xl font-bold text-neutral-100">
+        <h2 className="font-display mb-8 text-center text-2xl font-bold text-neutral-100">
           আমাদের মেনু
         </h2>
         {shop ? (

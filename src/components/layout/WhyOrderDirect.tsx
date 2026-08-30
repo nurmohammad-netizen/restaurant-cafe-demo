@@ -16,7 +16,7 @@ const POINTS = [
 export function WhyOrderDirect() {
   return (
     <section className="mx-auto w-full max-w-2xl px-4 py-12">
-      <h2 className="mb-6 text-center text-2xl font-bold text-neutral-100">
+      <h2 className="font-display mb-6 text-center text-2xl font-bold text-neutral-100">
         কেন সরাসরি অর্ডার করবেন?
       </h2>
       <div className="space-y-3">

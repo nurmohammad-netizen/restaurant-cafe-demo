@@ -6,7 +6,7 @@ export function LocationSection({ shop }: { shop: Shop | null }) {
 
   return (
     <section className="mx-auto w-full max-w-3xl px-4 py-12">
-      <h2 className="mb-6 text-center text-2xl font-bold text-neutral-100">
+      <h2 className="font-display mb-6 text-center text-2xl font-bold text-neutral-100">
         আমাদের অবস্থান
       </h2>
       <div className="overflow-hidden rounded-xl border border-neutral-800">

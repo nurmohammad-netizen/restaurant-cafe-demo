@@ -19,10 +19,10 @@ const REVIEWS = [
 export function Testimonials() {
   return (
     <section className="mx-auto w-full max-w-3xl px-4 py-12">
-      <h2 className="mb-1 text-center text-2xl font-bold text-neutral-100">
+      <h2 className="font-display mb-1 text-center text-2xl font-bold text-neutral-100">
         গ্রাহকদের মতামত
       </h2>
-      <p className="mb-8 text-center text-xs uppercase tracking-wide text-neutral-600">
+      <p className="mb-8 text-center text-xs text-neutral-600">
         নমুনা রিভিউ · ডেমো কন্টেন্ট
       </p>
       <div className="grid gap-4 sm:grid-cols-3">
