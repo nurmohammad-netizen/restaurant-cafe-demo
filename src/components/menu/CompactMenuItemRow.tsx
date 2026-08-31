@@ -48,13 +48,10 @@ export function CompactMenuItemRow({ item }: { item: MenuItem }) {
           usability bug (customers can't tell what they're ordering), so
           it wraps to a second line instead of being cut off. */}
       <div className="min-w-0 flex-1">
-        {/* 26px per explicit request — between the Hero subtitle (18px)
-            and the H1 headline (36-60px). Note this is larger than
-            FeaturedMenuItemCard's own name text (text-xl/20px/font-bold);
-            the featured cards still read as visually dominant overall
-            because of their big photo + standalone card treatment, not
-            because their name text is larger. */}
-        <p className="font-display text-[26px] leading-tight font-extrabold break-words text-neutral-100">
+        {/* text-xl (20px) — matches FeaturedMenuItemCard's own name size
+            (also text-xl). Settled here after a few rounds of iteration;
+            not intended to change further. */}
+        <p className="font-display text-xl leading-tight font-extrabold break-words text-neutral-100">
           {item.name}
         </p>
         {item.description ? (
