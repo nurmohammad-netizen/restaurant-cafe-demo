@@ -19,7 +19,7 @@ const hindSiliguri = Hind_Siliguri({
 });
 
 export const metadata: Metadata = {
-  title: "Dhaka Delights Cafe | Order Online (COD)",
+  title: "Nur Delights Cafe | Order Online (COD)",
   description:
     "Order your favorite Bangladeshi food online — Cash on Delivery.",
 };

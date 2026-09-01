@@ -22,7 +22,7 @@ export function AboutSection() {
             আমাদের গল্প
           </h2>
           <p className="leading-relaxed text-neutral-300">
-            Dhaka Delights Cafe-র যাত্রা শুরু হয়েছিল একটি ছোট্ট পারিবারিক
+            Nur Delights Cafe-র যাত্রা শুরু হয়েছিল একটি ছোট্ট পারিবারিক
             রান্নাঘর থেকে, যেখানে আমাদের দাদীর হাতের রেসিপি আজও অক্ষত রয়েছে
             প্রতিটি পদে। প্রতিদিন ভোরে বাজার থেকে সংগ্রহ করা তাজা উপকরণ, আর
             প্রজন্ম ধরে চলে আসা রান্নার কৌশল — এই দুইয়ের মিলনেই তৈরি হয়
@@ -33,7 +33,7 @@ export function AboutSection() {
             অর্ডারেই সেই একই যত্ন অক্ষুণ্ণ রাখার চেষ্টা করি।
           </p>
           <p className="mt-4 text-sm leading-relaxed text-neutral-500">
-            Dhaka Delights Cafe began in a small family kitchen, where our
+            Nur Delights Cafe began in a small family kitchen, where our
             grandmother&rsquo;s recipes still live on in every dish we
             serve. Fresh ingredients gathered each dawn from the local
             market, combined with cooking techniques passed down through

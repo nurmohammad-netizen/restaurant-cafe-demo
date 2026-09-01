@@ -33,7 +33,7 @@ export function Hero({ shop }: { shop: Shop | null }) {
 
       <div className="relative mx-auto max-w-2xl">
         <p className="font-display mb-3 inline-block border-b border-brass-500/50 pb-1 text-base font-bold text-amber-400 sm:text-lg">
-          {shop?.name ?? "Dhaka Delights Cafe"}
+          {shop?.name ?? "Nur Delights Cafe"}
         </p>
         <h1
           className="font-display text-4xl font-bold text-neutral-50 sm:text-5xl md:text-6xl"

@@ -8,7 +8,7 @@
 insert into shops (id, name, phone, address, whatsapp_number, is_active)
 values (
   '11111111-1111-1111-1111-111111111111',
-  'Dhaka Delights Cafe',
+  'Nur Delights Cafe',
   '+8801700000000',
   'House 12, Road 5, Dhanmondi, Dhaka 1209',
   '+8801700000000',
