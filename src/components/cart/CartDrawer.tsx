@@ -1,19 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { OrderForm } from "@/components/order/OrderForm";
 import { formatTaka } from "@/lib/utils";
-import type { OrderItem } from "@/lib/database.types";
+import type { OrderItem, Shop } from "@/lib/database.types";
 
 type Step = "cart" | "checkout" | "success";
 
 export function CartDrawer({
-  shopId,
+  shop,
   open,
   onClose,
 }: {
-  shopId: string;
+  shop: Shop;
   open: boolean;
   onClose: () => void;
 }) {
@@ -24,6 +24,13 @@ export function CartDrawer({
     items: OrderItem[];
     subtotal: number;
   } | null>(null);
+  const [lastWhatsAppUrl, setLastWhatsAppUrl] = useState<string | null>(null);
+  const [whatsappJustSent, setWhatsappJustSent] = useState(false);
+  const whatsappResetTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
+
+  useEffect(() => () => clearTimeout(whatsappResetTimeout.current), []);
 
   function handleClose() {
     onClose();
@@ -31,11 +38,23 @@ export function CartDrawer({
     setTimeout(() => setStep("cart"), 200);
   }
 
-  function handleOrderSuccess(orderId: string) {
+  function handleOrderSuccess(orderId: string, whatsappUrl: string | null) {
     setLastOrderId(orderId);
     setLastOrderSummary({ items, subtotal });
+    setLastWhatsAppUrl(whatsappUrl);
     setStep("success");
     clearCart();
+  }
+
+  function handleResendWhatsApp() {
+    if (!lastWhatsAppUrl) return;
+    window.open(lastWhatsAppUrl, "_blank", "noopener,noreferrer");
+    setWhatsappJustSent(true);
+    clearTimeout(whatsappResetTimeout.current);
+    whatsappResetTimeout.current = setTimeout(
+      () => setWhatsappJustSent(false),
+      1200,
+    );
   }
 
   if (!open) return null;
@@ -144,7 +163,7 @@ export function CartDrawer({
 
         {step === "checkout" ? (
           <OrderForm
-            shopId={shopId}
+            shop={shop}
             items={items}
             subtotal={subtotal}
             onBack={() => setStep("cart")}
@@ -190,6 +209,27 @@ export function CartDrawer({
                 ক্যাশ অন ডেলিভারি — ডেলিভারির সময় টাকা দিন। আমরা শীঘ্রই
                 আপনার সাথে যোগাযোগ করব।
               </p>
+
+              {lastWhatsAppUrl ? (
+                <div>
+                  {/* Order confirmation was already sent automatically on
+                      checkout — this button is the visible fallback in case
+                      the browser blocked that popup, plus a way to resend. */}
+                  <button
+                    type="button"
+                    onClick={handleResendWhatsApp}
+                    className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-white transition-colors ${
+                      whatsappJustSent
+                        ? "bg-betel-500"
+                        : "bg-betel-600 hover:bg-betel-500"
+                    }`}
+                  >
+                    {whatsappJustSent
+                      ? "✓ পাঠানো হয়েছে"
+                      : "💬 WhatsApp-এ অর্ডার পাঠান"}
+                  </button>
+                </div>
+              ) : null}
             </div>
             <div className="border-t border-neutral-800 p-4">
               <button

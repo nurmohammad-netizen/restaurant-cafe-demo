@@ -4,17 +4,18 @@ import { useState, type FormEvent } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { orderFormSchema } from "@/lib/validations";
 import { formatTaka } from "@/lib/utils";
-import type { OrderItem } from "@/lib/database.types";
+import { buildOrderWhatsAppMessage, buildWhatsAppOrderUrl } from "@/lib/whatsapp";
+import type { OrderItem, Shop } from "@/lib/database.types";
 
 type Props = {
-  shopId: string;
+  shop: Shop;
   items: OrderItem[];
   subtotal: number;
   onBack: () => void;
-  onSuccess: (orderId: string) => void;
+  onSuccess: (orderId: string, whatsappUrl: string | null) => void;
 };
 
-export function OrderForm({ shopId, items, subtotal, onBack, onSuccess }: Props) {
+export function OrderForm({ shop, items, subtotal, onBack, onSuccess }: Props) {
   const [values, setValues] = useState({
     customer_name: "",
     customer_phone: "",
@@ -51,7 +52,7 @@ export function OrderForm({ shopId, items, subtotal, onBack, onSuccess }: Props)
     const supabase = createClient();
     const { error } = await supabase.from("orders").insert({
       id: orderId,
-      shop_id: shopId,
+      shop_id: shop.id,
       customer_name: result.data.customer_name,
       customer_phone: result.data.customer_phone,
       customer_address: result.data.customer_address,
@@ -68,7 +69,28 @@ export function OrderForm({ shopId, items, subtotal, onBack, onSuccess }: Props)
       return;
     }
 
-    onSuccess(orderId);
+    // The Supabase row is already saved at this point — everything below
+    // is an add-on notification, not the source of truth for the order.
+    const whatsappMessage = buildOrderWhatsAppMessage({
+      shopName: shop.name,
+      orderId,
+      customerName: result.data.customer_name,
+      customerPhone: result.data.customer_phone,
+      customerAddress: result.data.customer_address,
+      items,
+      total: subtotal,
+    });
+    const whatsappUrl = buildWhatsAppOrderUrl(shop.whatsapp_number, whatsappMessage);
+
+    if (whatsappUrl) {
+      // Best-effort: browsers can silently block a popup here since this
+      // runs after an awaited network request, not synchronously inside
+      // the click handler. The success screen also renders `whatsappUrl`
+      // as a real button so the customer always has a working fallback.
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    }
+
+    onSuccess(orderId, whatsappUrl);
   }
 
   return (
@@ -104,6 +126,7 @@ export function OrderForm({ shopId, items, subtotal, onBack, onSuccess }: Props)
             মোবাইল নম্বর *
           </label>
           <input
+            type="tel"
             value={values.customer_phone}
             onChange={(e) =>
               setValues((v) => ({ ...v, customer_phone: e.target.value }))

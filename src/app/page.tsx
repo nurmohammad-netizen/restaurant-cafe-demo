@@ -79,7 +79,7 @@ export default async function HomePage() {
         <Footer shop={shop} />
       </div>
 
-      {shop ? <StorefrontCart shopId={shop.id} /> : null}
+      {shop ? <StorefrontCart shop={shop} /> : null}
     </CartProvider>
   );
 }
